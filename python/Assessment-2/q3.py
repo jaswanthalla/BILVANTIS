@@ -1,4 +1,4 @@
-# 13. Write a Python program using lambda with filter() and map() to get all words longer than 4 characters from a list and convert them to upper case.
+# Write a Python program using lambda with filter() and map() to get all words longer than 4 characters from a list and convert them to upper case.
 
 # Original list: ['sun', 'python', 'code', 'java', 'program']
 
