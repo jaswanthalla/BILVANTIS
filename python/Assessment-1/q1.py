@@ -32,14 +32,3 @@ print(descending)
 
 names = [emp["name"] for emp in employees]
 print(names)
-
-high = employees[0]
-second = employees[0]
-for a in employees:
-    if a["salary"] > high["salary"]:
-        high = a
-    if a["salary"] > second["salary"] and second != high:
-        second = a
-
-print(high)
-print(second)
