@@ -1,0 +1,21 @@
+product_id,product_name,category,price
+1,Headphones,Electronics,4535.56
+2,Keyboard,Electronics,4311.21
+3,Mouse,Electronics,446.2
+4,Monitor,Electronics,1265.22
+5,Webcam,Electronics,3376.99
+6,Python Basics,Books,1148.76
+7,Spark Guide,Books,747.33
+8,SQL Cookbook,Books,4683.02
+9,Data Engineering 101,Books,2897.11
+10,Desk Lamp,Home,2415.09
+11,Office Chair,Home,3943.64
+12,Water Bottle,Home,4055.74
+13,Coffee Mug,Home,1032.01
+14,Yoga Mat,Fitness,573.96
+15,Dumbbells,Fitness,2211.15
+16,Running Shoes,Fitness,2174.54
+17,Fitness Band,Fitness,2387.42
+18,Notebook,Stationery,3671.47
+19,Pen Set,Stationery,3398.49
+20,Planner,Stationery,4921.41
