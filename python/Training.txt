@@ -13,3 +13,4 @@ Pandas dataframes introduction and selecting and viewing the data
 Operations, grouping, merging and Manipulating data
 Read files using python (CSV, JSON, EXCEL and XML)
 
+wh
