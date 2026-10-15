@@ -1,0 +1,48 @@
+1. Loading Data with Schema (Cell 1)
+spark.read.option("header", True).schema("...").csv(...) — reads CSV files using the first row as headers and an explicit schema (manually defining column names and types like INT, STRING, DATE, DOUBLE).
+This is different from Day-4 where columns were read as strings — here each column gets its proper type from the start, so no .cast() is needed later.
+2. Inspecting DataFrames (Cell 3 — Task 1)
+printSchema() — prints the column names, data types, and nullability in a tree format.
+.columns — returns a list of column names.
+.dtypes — returns a list of (column_name, data_type) pairs.
+.count() — an action that counts all rows.
+3. select (Cell 4 — Task 2)
+select("customer_id", "first_name") — picks only the specified columns, drops the rest. Think of it like choosing columns in a spreadsheet.
+4. withColumn + concat_ws (Cell 5 — Task 2 cont.)
+withColumn("full_name", F.concat_ws(" ", "first_name", "last_name")) — adds a new column full_name by joining first_name and last_name with a space separator → e.g., "Aarav Nair".
+5. filter + orderBy + select (Cell 6 — Task 3)
+filter((F.col("category") == "Electronics") & (F.col("price") > 1000)) — keeps only rows where category is Electronics AND price is above 1000. The & combines two conditions.
+orderBy(F.col("price").desc()) — sorts by price in descending order (highest first).
+select("product_name", "price") — picks only these two columns for the final output.
+6. distinct + orderBy (Cell 7 — Task 4)
+select(F.col("city")) — picks just the city column.
+.distinct() — removes duplicate cities, keeping only unique values.
+.orderBy(F.col("city").desc()) — sorts unique cities in reverse alphabetical order.
+7. createOrReplaceTempView + spark.sql (Cell 8 — Task 5)
+createOrReplaceTempView("customers") — registers the DataFrame as a SQL table named "customers" so you can write SQL queries against it.
+spark.sql("select * from customers") — runs a SQL query on that table. This is an alternative to the DataFrame API — same result, different syntax.
+8. GROUP BY + COUNT in SQL (Cell 9 — Task 5 cont.)
+SELECT state, COUNT(*) ... GROUP BY state ORDER BY ... DESC — the SQL equivalent of groupBy("state").agg(count(...)).orderBy(desc()). Groups customers by state, counts how many in each state, and sorts highest first.
+9. groupBy + agg with multiple functions (Cell 10 — Task 6)
+Same question done two ways:
+
+DataFrame API:
+
+groupBy("category") — groups products by category.
+agg(F.count("product_id"), F.round(F.avg("price"), 2)) — for each category, counts products and averages price (rounded to 2 decimals).
+orderBy(F.col("avg_price").desc()) — sorts by average price, highest first.
+Spark SQL:
+
+SELECT category, COUNT(product_id), ROUND(AVG(price), 2) ... GROUP BY category ORDER BY avg_price DESC — identical logic, just written as SQL.
+Both produce the same result — this shows that the DataFrame API and Spark SQL are interchangeable.
+
+10. Join + groupBy + count + withColumnRenamed + limit (Cell 11 — Task 7)
+orders.join(customers, "customer_id", "inner") — merges orders with customers by matching customer_id. Inner join keeps only rows that exist in both tables.
+groupBy("city").count() — counts how many orders came from each city.
+withColumnRenamed("count", "order_count") — renames the auto-generated count column to something more meaningful.
+orderBy(F.col("order_count").desc()) — sorts cities by order count, highest first.
+limit(5) — keeps only the top 5 rows.
+11. Partition Inspection (Cell 13)
+F.spark_partition_id() — returns the ID of the Spark partition each row belongs to.
+.distinct().count() — by counting unique partition IDs, you find out how many partitions the DataFrame is split across.
+This is the Serverless/Spark Connect alternative to .rdd.getNumPartitions(), which doesn't work on Spark Connect.

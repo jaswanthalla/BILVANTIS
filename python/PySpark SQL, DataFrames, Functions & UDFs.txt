@@ -1,0 +1,53 @@
+1. Loading Data (Cell 1)
+spark.read.option("header", True).csv(...) — reads a CSV file and uses the first row as column names. Returns a DataFrame.
+spark.read.schema("...").json(...) — reads a JSON file with an explicit schema (manually specifying column names and types like INT, STRING, STRUCT, ARRAY, MAP).
+.createOrReplaceTempView("orders") — registers the DataFrame as a SQL table so you can query it using spark.sql("SELECT ...").
+2. Filter (Cell 3 — Task 1)
+filter(F.col("order_status") == "CLOSED") — keeps only rows where order_status is "CLOSED", drops everything else.
+.count() — an action (not a transformation) that triggers execution and returns a single number.
+3. withColumn + groupBy + agg + orderBy (Cell 4 — Task 2)
+withColumn("order_month", F.month(...)) — adds a new column called order_month by extracting the month from order_date.
+groupBy("order_month") — groups all rows sharing the same month into one bucket.
+agg(F.count(...), F.round(F.sum(...), 2)) — for each group, calculates count of orders and sum of revenue (rounded to 2 decimals).
+orderBy("order_month") — sorts the final result by month ascending.
+4. Join (Cell 5 — Task 3)
+orders.join(customers, on="customer_id", how="inner") — merges two DataFrames side by side by matching rows on customer_id. Inner means only rows that exist in both tables are kept.
+Then groupBy("state") + agg(F.sum(...)) + orderBy(desc()) — same pattern as before, but now grouped by state and sorted highest revenue first.
+5. groupBy + agg + filter + count (Cell 6 — Task 4)
+groupBy("customer_id") — one group per customer.
+agg(F.sum(...).alias("total_spent")) — sums each customer's total spending.
+filter(F.col("total_spent") > 100000) — keeps only customers who spent more than 100,000.
+.count() — counts how many such customers remain.
+6. String Functions via select (Cell 8 — Task 6)
+select(...) — picks specific columns and creates new ones.
+F.lower(...) — converts text to lowercase.
+F.concat_ws(".", ...) — joins multiple columns with a "." separator.
+F.concat(...) — joins without a separator.
+F.substring(col, 1, 1) — extracts 1 character starting at position 1 (first letter).
+F.upper(...) — converts text to uppercase.
+F.length(...) — counts the number of characters.
+7. Numeric Functions via select (Cell 9 — Task 7)
+F.col("amount").cast("double") — converts the string "9355.49" into a numeric 9355.49 so math works.
+F.round(expr, 2) — rounds to 2 decimal places.
+F.floor(expr) — rounds down to the nearest whole number (e.g., 9.35 → 9).
+8. Conditional Logic with when/otherwise (Cell 10 — Task 9)
+withColumn("amount_band", F.when(...).when(...).otherwise(...)) — adds a new column based on conditions, evaluated top to bottom:
+If amount is null → "UNKNOWN"
+If amount ≥ 20000 → "HIGH"
+If amount ≥ 5000 → "MEDIUM"
+Otherwise → "LOW"
+The order matters — the first matching condition wins.
+9. Null Handling (Cell 11 — Task 10)
+F.col("amount").isNull() — checks if a value is null.
+F.coalesce(col, F.lit("0.0")) — if amount is null, replace it with "0.0". Otherwise keep the original value.
+dropna(subset=["amount"]) — removes any row where amount is null.
+fillna({"amount": "0"}) — replaces nulls in amount with "0" but doesn't change the sum because SUM already ignores nulls.
+10. Multiple Aggregations in One agg() (Cell 12 — Task 11)
+All six calculations happen in a single pass:
+
+F.count("order_id") — total number of orders
+F.sum(...) — total revenue
+F.avg(...) — average amount per order
+F.max(...) — largest single order
+F.countDistinct("order_status") — how many unique statuses the customer has
+F.collect_set("order_status") — gathers all distinct statuses into an array like ["CLOSED", "PENDING", "COMPLETE"]
