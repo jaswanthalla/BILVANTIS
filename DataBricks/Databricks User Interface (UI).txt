@@ -1,0 +1,387 @@
+Databricks User Interface (UI) Guide
+Introduction
+
+Databricks is a unified analytics platform that combines Data Engineering, Data Science, Data Analytics, Machine Learning, and AI on a single platform. The Databricks User Interface (UI) provides tools to create, manage, monitor, and collaborate on data workloads efficiently.
+
+1. Databricks Workspace Overview
+
+After logging into Databricks, you will see the main navigation menu on the left side.
+
+Common sections include:
+
+Workspace
+Catalog
+Compute
+Workflows
+SQL
+Dashboards
+Genie
+Experiments
+Model Registry
+Apps
+Settings
+2. Workspace
+
+The Workspace is where users organize project assets.
+
+Purpose
+
+Store and manage:
+
+Notebooks
+Folders
+Files
+Libraries
+Repositories (Git-integrated projects)
+Example
+Workspace
+ └── DataEngineering
+      ├── Bronze_Layer
+      ├── Silver_Layer
+      └── Gold_Layer
+
+Uses
+Write PySpark code
+Create SQL notebooks
+Collaborate with teammates
+Organize project files
+3. Notebooks
+
+Notebooks are interactive environments used to write and execute code.
+
+Supported Languages
+Python
+SQL
+Scala
+R
+Notebook Components
+Command Cell
+Python
+print("Hello Databricks")
+Run Button
+
+Executes the selected cell.
+
+Output Area
+
+Displays:
+
+Tables
+Charts
+Logs
+Results
+Why Use Notebooks?
+Easy development
+Interactive analysis
+Supports visualizations
+Sharing and collaboration
+4. Catalog
+
+The Catalog section is used for data governance and managing database objects.
+
+Contains
+Catalogs
+Schemas
+Tables
+Views
+Volumes
+Structure
+Catalog
+  └── Schema
+         └── Table
+
+Example
+sales_catalog
+    └── retail_schema
+            └── customers
+
+Benefits
+Centralized metadata management
+Access control
+Data discovery
+Governance
+5. Compute
+
+Compute provides the processing power for executing notebooks and jobs.
+
+Types
+A. All-Purpose Cluster
+
+Used for:
+
+Development
+Testing
+Interactive work
+B. Job Cluster
+
+Used for:
+
+Scheduled workloads
+Production jobs
+C. Serverless Compute
+
+Databricks manages infrastructure automatically.
+
+Cluster Information
+
+Shows:
+
+Cluster status
+Number of workers
+Runtime version
+Resource consumption
+6. Workflows
+
+Workflows help automate tasks.
+
+Components
+Jobs
+Tasks
+Schedules
+Notifications
+Example
+Workflow
+   ├── Ingest Data
+   ├── Transform Data
+   └── Load Gold Table
+
+Benefits
+Automation
+Dependency management
+Scheduling
+Monitoring
+7. SQL Editor
+
+The SQL Editor allows analysts to run SQL queries.
+
+Example
+SQL
+SELECT state,
+COUNT(*) AS customer_count
+FROM customers
+GROUP BY state;
+Features
+Query execution
+Query history
+Query sharing
+Visualization support
+8. Dashboards
+
+Dashboards convert query results into visual reports.
+
+Common Visuals
+Bar Charts
+Pie Charts
+Line Charts
+KPI Cards
+Tables
+Uses
+Business reporting
+Executive dashboards
+Monitoring KPIs
+9. Data Explorer
+
+Used to explore data assets.
+
+You Can View
+Catalogs
+Schemas
+Tables
+Views
+Columns
+Metadata Information
+Column names
+Data types
+Owners
+Permissions
+10. Unity Catalog
+
+Unity Catalog is Databricks' governance solution.
+
+Purpose
+
+Provides centralized governance for:
+
+Data
+AI assets
+Models
+Files
+Hierarchy
+Catalog
+   └── Schema
+          └── Table
+
+Example
+main
+   └── sales
+          └── customers
+
+Benefits
+Fine-grained access control
+Data lineage
+Auditing
+Security
+11. Volumes
+
+Volumes store files in Unity Catalog.
+
+Types of Files
+CSV
+JSON
+Parquet
+Images
+PDFs
+Example Path
+Python
+/Volumes/main/sales/raw/customers.csv
+Benefits
+Secure file storage
+Managed access
+Easy sharing
+12. Repos (Git Integration)
+
+Repos connect Databricks to Git providers.
+
+Supported Platforms
+GitHub
+Azure DevOps
+GitLab
+Bitbucket
+Operations
+Clone
+Pull
+Push
+Commit
+Branch
+Why Use Repos?
+Version control
+Collaboration
+CI/CD support
+13. Experiments (Machine Learning)
+
+Used for tracking ML experiments.
+
+Information Stored
+Parameters
+Metrics
+Models
+Artifacts
+Example
+Experiment
+   ├── Accuracy = 95%
+   ├── Precision = 92%
+   └── Recall = 94%
+
+14. Model Registry
+
+Stores machine learning models.
+
+Stages
+Development
+Staging
+Production
+Archived
+Benefits
+Version control
+Deployment management
+Model governance
+15. Genie
+
+Genie enables natural language interaction with data.
+
+Example
+
+User asks:
+
+"Show total sales by state."
+
+Genie translates the request into SQL and returns results.
+
+Benefits
+No SQL knowledge required
+Faster analytics
+Self-service reporting
+16. Job Monitoring UI
+
+Used to monitor workflow executions.
+
+Displays
+Job Status
+Duration
+Start Time
+End Time
+Error Logs
+Status Types
+Running
+Success
+Failed
+Cancelled
+17. Cluster Monitoring UI
+
+Tracks cluster health.
+
+Metrics
+CPU Utilization
+Memory Usage
+Active Jobs
+Executors
+Worker Nodes
+Benefits
+Performance monitoring
+Cost optimization
+Troubleshooting
+18. Databricks Asset Types
+Asset	PurposeNotebook	Write code
+Workflow	Automate jobs
+Dashboard	Reporting
+Query	Execute SQL
+Table	Store structured data
+Volume	Store files
+Model	Store ML models
+Repo	Version control
+Typical Databricks Workflow
+Data Engineering Pipeline
+Raw Data
+    |
+    v
+Bronze Tables
+    |
+    v
+Silver Tables
+    |
+    v
+Gold Tables
+    |
+    v
+Dashboard / Reports
+
+Databricks Components Used
+Volumes
+   ↓
+Notebook
+   ↓
+Cluster
+   ↓
+Bronze Table
+   ↓
+Silver Table
+   ↓
+Gold Table
+   ↓
+Dashboard
+
+Summary
+
+The Databricks UI consists of several integrated components:
+
+Workspace → Organize notebooks and files
+Compute → Execute workloads
+Catalog → Manage data assets
+Unity Catalog → Governance and security
+Workflows → Automate jobs
+SQL Editor → Query data
+Dashboards → Visualize insights
+Volumes → Store files
+Repos → Git integration
+Genie → Natural language analytics
+Experiments & Models → Machine learning lifecycle management
