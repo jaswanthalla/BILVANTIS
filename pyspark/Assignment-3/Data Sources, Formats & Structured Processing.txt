@@ -1,0 +1,897 @@
+This assignment covers almost all the fundamental Data Engineering concepts in PySpark. If an interviewer asks:
+
+"What did you learn in PySpark Data Sources and Structured Processing?"
+
+You can use this document as your revision guide.
+
+1. SparkSession
+What is it?
+
+Entry point to Spark.
+
+Python
+spark = SparkSession.builder \
+.appName("assignment1") \
+.getOrCreate()
+Purpose
+Creates Spark application
+Connects to Spark cluster
+Used to read and write data
+Used to execute DataFrame and SQL queries
+2. Data Sources
+What are Data Sources?
+
+Files or external systems from which Spark reads data.
+
+Examples:
+
+CSV
+JSON
+Parquet
+Avro
+XML
+Delta Lake
+Database Tables
+
+In this assignment:
+
+Plain Text
+orders.csv
+customers.csv
+employees.json
+
+were data sources.
+
+3. DataFrameReader
+Purpose
+
+Reads data into Spark DataFrames.
+
+Example:
+
+Python
+spark.read.csv("orders.csv")
+
+or
+
+Python
+spark.read.json("employees.json")
+Methods Learned
+Python
+spark.read
+.option()
+.schema()
+.csv()
+.json()
+4. DataFrameWriter
+Purpose
+
+Writes DataFrames to storage.
+
+Example:
+
+Python
+df.write.parquet("path")
+Methods Learned
+Python
+write.csv()
+write.json()
+write.parquet()
+5. Explicit Schema
+What is it?
+
+You manually tell Spark the data types.
+
+Python
+ORDERS_SCHEMA = """
+order_id INT,
+order_date DATE,
+customer_id INT,
+order_status STRING,
+amount DOUBLE
+"""
+
+Then:
+
+Python
+spark.read.schema(ORDERS_SCHEMA)
+ 
+Benefits
+Fast
+Consistent
+No extra scan of data
+Production best practice
+6. Inferred Schema
+What is it?
+
+Spark automatically determines datatype.
+
+Python
+spark.read.option("inferSchema",True)
+Purpose
+
+Convenient for exploration.
+
+Drawback
+
+Spark must scan data first.
+
+Extra work:
+
+Plain Text
+Read File
+↓
+Infer Types
+↓
+Read Again
+
+Therefore slower.
+
+7. Spark Jobs
+
+Used in Task 1.
+
+Observation
+Explicit Schema
+
+Usually:
+
+Plain Text
+1 Job
+Infer Schema
+
+Usually:
+
+Plain Text
+2 Jobs
+
+Reason:
+
+Scan file to infer types
+Read actual data
+8. CSV File Processing
+
+Covered through:
+
+Python
+spark.read.csv()
+
+and
+
+Python
+df.write.csv()
+Important CSV Options
+Python
+.option("header",True)
+.option("sep","|")
+.option("inferSchema",True)
+9. Read Modes
+
+Task 2
+
+Used while reading dirty files.
+
+PERMISSIVE Mode
+
+Default mode.
+
+Python
+.option("mode","PERMISSIVE")
+
+Behavior:
+
+Plain Text
+Bad value → Null
+Continue processing
+
+Example:
+
+Plain Text
+abc
+
+becomes
+
+Plain Text
+null
+ 
+DROPMALFORMED
+Python
+.option("mode","DROPMALFORMED")
+
+Behavior:
+
+Plain Text
+Bad row detected
+↓
+Drop entire row
+
+Only good rows appear.
+
+FAILFAST
+Python
+.option("mode","FAILFAST")
+
+Behavior:
+
+Plain Text
+Bad record
+↓
+Throw Exception
+↓
+Job Stops
+
+Used when data quality is critical.
+
+10. Corrupt Records Handling
+
+Task 3
+
+Schema:
+
+Python
+_corrupt_record STRING
+
+Purpose:
+
+Store problematic rows.
+
+Example:
+
+Python
+07/15/2026
+
+or
+
+Python
+abc
+ 
+
+gets captured.
+
+11. Cache()
+
+Used while handling corrupt records.
+
+Python
+df.cache()
+Purpose
+
+Keep DataFrame in memory.
+
+Benefits:
+
+Plain Text
+Avoid repeated file reads
+Improve performance
+12. JSON Processing
+
+Task 4
+
+Reading:
+
+Python
+spark.read.json()
+Concepts Learned
+Nested JSON
+Arrays
+Maps
+Structs
+13. Nested Data
+
+Example:
+
+JSON
+{
+"address": {
+"city":"Hyderabad",
+"state":"TG"
+}
+}
+
+Schema:
+
+Plain Text
+address
+|-- city
+|-- state
+
+Access:
+
+Python
+F.col("address.city")
+ 
+14. Struct Type
+
+Address becomes:
+
+Plain Text
+StructType
+
+Purpose:
+
+Group related fields.
+
+Plain Text
+address
+├─ city
+└─ state
+15. Array Type
+
+Example:
+
+JSON
+"skills":
+[
+"Python",
+"Spark",
+"SQL"
+]
+
+Spark Type:
+
+Plain Text
+ArrayType
+
+Count:
+
+Python
+F.size("skills")
+
+Result:
+
+Plain Text
+3
+16. Map Type
+
+Example:
+
+JSON
+"certifications":
+{
+"AWS":"Certified",
+"Azure":"Associate"
+}
+
+Spark Type:
+
+Plain Text
+MapType
+
+Used for:
+
+Plain Text
+key → value
+relationships
+17. Aggregations
+
+Tasks 4, 8, 11, 12
+
+What is aggregation?
+
+Combine multiple rows into summary results.
+
+Examples:
+
+Python
+count()
+sum()
+avg()
+min()
+max()
+18. GroupBy
+Python
+df.groupBy("state")
+ 
+
+Purpose:
+
+Create groups.
+
+Example:
+
+Plain Text
+TG
+TG
+KA
+KA
+KA
+
+Groups:
+
+Plain Text
+TG
+KA
+
+before aggregating.
+
+19. Count
+Python
+F.count("*")
+
+Purpose:
+
+Count rows.
+
+Example:
+
+Python
+groupBy("status").count()
+20. Count Distinct
+
+Task 8
+
+Python
+F.countDistinct("customer_id")
+ 
+
+Purpose:
+
+Count unique customers.
+
+21. Sorting
+
+Task 8 and Task 10
+
+Ascending:
+
+Python
+orderBy("amount")
+
+Descending:
+
+Python
+orderBy(F.desc("amount"))
+22. Null Handling During Sorting
+
+Task 10
+
+Python
+F.col("amount").asc_nulls_last()
+
+Purpose:
+
+Push null values to end.
+
+Example:
+
+Before
+
+Plain Text
+NULL
+100
+200
+
+After
+
+Plain Text
+100
+200
+NULL
+23. Filtering
+
+Task 10
+
+Python
+filter()
+where()
+
+Examples:
+
+Python
+orders.filter(F.col("amount") < 2000)
+24. Multiple Conditions
+
+Using:
+
+Python
+&
+|
+~
+
+Examples:
+
+Python
+(cond1) & (cond2)
+
+AND
+
+Python
+(cond1) | (cond2)
+
+OR
+
+25. String Filtering
+
+Task 10
+
+Python
+startswith()
+
+Example:
+
+Python
+F.col("order_status").startswith("PENDING")
+
+or
+
+Python
+like("PENDING%")
+ 
+26. Temporary Views
+
+Created in starter code.
+
+Python
+orders.createOrReplaceTempView("orders")
+
+Purpose:
+
+Query DataFrames using SQL.
+
+27. Spark SQL
+
+Task 9
+
+Example:
+
+Python
+spark.sql("""
+SELECT *
+FROM orders
+""")
+
+Purpose:
+
+Use SQL language on DataFrames.
+
+28. DataFrame API vs SQL
+
+You learned both approaches.
+
+DataFrame API
+Python
+df.filter(...)
+.groupBy(...)
+.count()
+SQL
+SQL
+SELECT
+GROUP BY
+WHERE
+ORDER BY
+
+Both produce same results.
+
+29. LIMIT
+
+Task 9
+
+Python
+limit(5)
+
+Purpose:
+
+Return top N records.
+
+30. Parquet Format
+
+Task 5
+
+What is Parquet?
+
+Columnar Storage format.
+
+Advantages:
+
+Faster reads
+Better compression
+Less disk space
+Analytics optimized
+
+Industry standard.
+
+31. Columnar Storage
+
+CSV:
+
+Plain Text
+Row1
+Row2
+Row3
+
+Parquet:
+
+Plain Text
+Column1 values together
+Column2 values together
+
+Benefits:
+
+Plain Text
+Faster aggregation
+Faster filtering
+32. Save Modes
+
+Task 5
+
+ErrorIfExists
+
+Default mode.
+
+Python
+mode("error")
+
+Throws error if path exists.
+
+Append
+Python
+mode("append")
+
+Adds records.
+
+Ignore
+Python
+mode("ignore")
+
+Skips write if path exists.
+
+Overwrite
+Python
+mode("overwrite")
+
+Deletes old data and writes new data.
+
+33. Partitioning
+
+Task 6
+
+Python
+partitionBy("order_status")
+
+Purpose:
+
+Split data into folders.
+
+Example:
+
+Plain Text
+orders_by_status
+ 
+├── order_status=CLOSED
+├── order_status=PENDING
+└── order_status=PROCESSING
+34. Partition Pruning
+
+Important Interview Topic
+
+Query:
+
+Python
+filter(F.col("order_status")=="CLOSED")
+
+Spark reads only:
+
+Plain Text
+order_status=CLOSED
+ 
+
+folder.
+
+Not all folders.
+
+Benefits:
+
+Plain Text
+Less I/O
+Faster Queries
+
+Visible in:
+
+Python
+explain()
+
+as
+
+Plain Text
+PartitionFilters
+35. Explain Plan
+
+Task 6
+
+Python
+df.explain()
+
+Purpose:
+
+Shows query execution plan.
+
+Used heavily in optimization.
+
+36. Coalesce
+
+Task 7
+
+Python
+coalesce(1)
+
+Purpose:
+
+Reduce partitions.
+
+Example:
+
+Plain Text
+10 files
+↓
+1 file
+
+Useful when exporting reports.
+
+37. Actions
+
+Triggered throughout assignment.
+
+Examples:
+
+Python
+show()
+count()
+collect()
+
+Purpose:
+
+Actually execute Spark computation.
+
+38. Transformations
+
+Examples:
+
+Python
+select()
+filter()
+groupBy()
+orderBy()
+withColumn()
+
+Purpose:
+
+Build execution plan.
+
+Lazy evaluation.
+
+39. Lazy Evaluation
+
+Spark does not execute immediately.
+
+Example:
+
+Python
+df.filter(...)
+.select(...)
+
+Nothing happens yet.
+
+Execution occurs when:
+
+Python
+show()
+count()
+collect()
+
+are called.
+
+40. Revenue Analytics
+
+Tasks 11 and 12
+
+Business metrics learned:
+
+Python
+Total Revenue
+Average Revenue
+Maximum Revenue
+Minimum Revenue
+Order Count
+
+Functions:
+
+Python
+sum()
+avg()
+min()
+max()
+41. HAVING Clause Equivalent
+
+Task 12
+
+SQL:
+
+SQL
+HAVING SUM(revenue) > 100000
+
+DataFrame:
+
+Python
+groupBy(...)
+.agg(...)
+.filter(...)
+
+Filtering after aggregation behaves like HAVING.
+
+42. Null Concepts
+
+One of the most important topics.
+
+count(*)
+
+Counts everything.
+
+count(column)
+
+Counts only non-null values.
+
+Example:
+
+amount100
+200
+NULL
+Python
+cou*t("*")
+
+Result:
+
+Plain Text
+3
+```*
+Python
+count("amount")
+
+Result:
+
+Plain Text
+2
+
+This explains Task 11's question:
+
+Why are total orders and orders-with-amount different?
+
+Because null amounts are ignored in column counts.
+
+43. Bonus Topics
+Avro Format
+
+Popular data exchange format.
+
+Features:
+
+Compact
+Supports schema
+Used with Kafka
+XML Format
+
+Hierarchical format.
+
+Example:
+
+XML
+<employee>
+<name>John</nam*>
+</employee>
+
+Spark supports reading/writing XML.
+
+44. Revenue Percentage Calculation
+
+Business Analytics Concept.
+
+Formula:
+
+Python
+(status_revenue / total_revenue) * 100
+
+Used to determine:
+
+Plain Text
+Status contribution
+Revenue share
+Business performance
