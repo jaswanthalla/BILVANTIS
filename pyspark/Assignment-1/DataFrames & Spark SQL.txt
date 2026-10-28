@@ -46,3 +46,26 @@ limit(5) — keeps only the top 5 rows.
 F.spark_partition_id() — returns the ID of the Spark partition each row belongs to.
 .distinct().count() — by counting unique partition IDs, you find out how many partitions the DataFrame is split across.
 This is the Serverless/Spark Connect alternative to .rdd.getNumPartitions(), which doesn't work on Spark Connect.
+
+important saprk methods that are used in databricks notebooks
+show()
+printSchema()
+select()
+filter()
+where()
+withColumn()
+drop()
+groupBy()
+agg()
+orderBy()
+distinct()
+dropDuplicates()
+join()
+union()
+count()
+createOrReplaceTempView()
+spark.sql()
+row_number()
+rank()
+dense_rank()
+sum().over()
