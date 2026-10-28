@@ -54,6 +54,10 @@ Python
 SQL
 Scala
 R
+Python
+SQL
+Scala
+R
 Notebook Components
 Command Cell
 Python
