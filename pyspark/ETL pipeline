@@ -1,0 +1,23 @@
+Example of a ETL pipeline 
+
+Raw File
+   ↓
+Read Data
+   ↓
+Validate
+   ↓
+Remove Bad Records
+   ↓
+Handle Nulls
+   ↓
+Standardize
+   ↓
+Join Lookup Tables
+   ↓
+Aggregate
+   ↓
+Add Audit Columns
+   ↓
+Write to Delta/Table
+
+
