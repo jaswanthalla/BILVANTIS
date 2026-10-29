@@ -413,3 +413,25 @@ row_number()
 rank()
 dense_rank()
 sum().over()
+
+ETL Pipeline
+
+Raw File
+   ↓
+Read Data
+   ↓
+Validate
+   ↓
+Remove Bad Records
+   ↓
+Handle Nulls
+   ↓
+Standardize
+   ↓
+Join Lookup Tables
+   ↓
+Aggregate
+   ↓
+Add Audit Columns
+   ↓
+Write to Delta/Table
