@@ -25,7 +25,7 @@ Write to Delta/Table
    Read data from source systems.
 
 2. Validate
-   Check schema, nulls, duplicates, and business rules.
+   Check schema, nulls, duplicates, and, business rules.
 
 3. Remove Bad Records
    Eliminate unusable records.
