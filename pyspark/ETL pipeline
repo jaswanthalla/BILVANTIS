@@ -21,3 +21,29 @@ Add Audit Columns
 Write to Delta/Table
 
 
+1. Extract
+   Read data from source systems.
+
+2. Validate
+   Check schema, nulls, duplicates, and business rules.
+
+3. Remove Bad Records
+   Eliminate unusable records.
+
+4. Handle Nulls
+   Replace or manage missing values.
+
+5. Standardize
+   Make formats consistent.
+
+6. Join Lookup Tables
+   Enrich data with additional business information.
+
+7. Aggregate
+   Create business metrics and summaries.
+
+8. Add Audit Columns
+   Track load dates and processing history.
+
+9. Load
+   Store trusted data into Delta tables, warehouses, or marts.
