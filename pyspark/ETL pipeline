@@ -47,3 +47,28 @@ Write to Delta/Table
 
 9. Load
    Store trusted data into Delta tables, warehouses, or marts.
+
+
+Important spark methods
+
+show()
+printSchema()
+select()
+filter()
+where()
+withColumn()
+drop()
+groupBy()
+agg()
+orderBy()
+distinct()
+dropDuplicates()
+join()
+union()
+count()
+createOrReplaceTempView()
+spark.sql()
+row_number()
+rank()
+dense_rank()
+sum().over()
