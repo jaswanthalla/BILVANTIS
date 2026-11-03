@@ -36,9 +36,9 @@ Repositories (Git-integrated projects)
 Example
 Workspace
  └── DataEngineering
-      ├── Bronze_Layer
-      ├── Silver_Layer
-      └── Gold_Layer
+      ├── Bronze_Layer_
+      ├── Silver_Layer_
+      └── Gold_Layer_
 
 Uses
 Write PySpark code
