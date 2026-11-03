@@ -45,6 +45,7 @@ Write PySpark code
 Create SQL notebooks
 Collaborate with teammates
 Organize project files
+
 3. Notebooks
 
 Notebooks are interactive environments used to write and execute code.
