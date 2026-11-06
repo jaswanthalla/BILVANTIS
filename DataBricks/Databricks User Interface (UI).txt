@@ -20,6 +20,7 @@ Experiments
 Model Registry
 Apps
 Settings
+
 2. Workspace
 
 The Workspace is where users organize project assets.
@@ -80,6 +81,7 @@ Easy development
 Interactive analysis
 Supports visualizations
 Sharing and collaboration
+
 4. Catalog
 
 The Catalog section is used for data governance and managing database objects.
@@ -105,6 +107,7 @@ Centralized metadata management
 Access control
 Data discovery
 Governance
+
 5. Compute
 
 Compute provides the processing power for executing notebooks and jobs.
@@ -135,6 +138,7 @@ Cluster status
 Number of workers
 Runtime version
 Resource consumption
+
 6. Workflows
 
 Workflows help automate tasks.
