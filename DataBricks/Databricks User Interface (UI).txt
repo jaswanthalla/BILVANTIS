@@ -205,6 +205,7 @@ Column names
 Data types
 Owners
 Permissions
+
 10. Unity Catalog
 
 Unity Catalog is Databricks' governance solution.
@@ -232,6 +233,7 @@ Fine-grained access control
 Data lineage
 Auditing
 Security
+
 11. Volumes
 
 Volumes store files in Unity Catalog.
@@ -249,6 +251,7 @@ Benefits
 Secure file storage
 Managed access
 Easy sharing
+
 12. Repos (Git Integration)
 
 Repos connect Databricks to Git providers.
@@ -268,6 +271,7 @@ Why Use Repos?
 Version control
 Collaboration
 CI/CD support
+
 13. Experiments (Machine Learning)
 
 Used for tracking ML experiments.
@@ -296,6 +300,7 @@ Benefits
 Version control
 Deployment management
 Model governance
+
 15. Genie
 
 Genie enables natural language interaction with data.
@@ -327,6 +332,7 @@ Running
 Success
 Failed
 Cancelled
+
 17. Cluster Monitoring UI
 
 Tracks cluster health.
@@ -341,6 +347,7 @@ Benefits
 Performance monitoring
 Cost optimization
 Troubleshooting
+
 18. Databricks Asset Types
 Asset	PurposeNotebook	Write code
 Workflow	Automate jobs
