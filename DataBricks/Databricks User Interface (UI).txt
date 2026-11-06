@@ -155,6 +155,7 @@ Automation
 Dependency management
 Scheduling
 Monitoring
+
 7. SQL Editor
 
 The SQL Editor allows analysts to run SQL queries.
@@ -170,6 +171,7 @@ Query execution
 Query history
 Query sharing
 Visualization support
+
 8. Dashboards
 
 Dashboards convert query results into visual reports.
