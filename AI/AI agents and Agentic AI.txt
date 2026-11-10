@@ -28,7 +28,7 @@ Key components involved in building ai agents:
 
 
 
-
+aa
 **Environment – the external world that the agent perceives and interacts with
 
 **Sensors – how the agent collects data about its surroundings
