@@ -405,7 +405,7 @@ Genie → Natural language analytics
 Experiments & Models → Machine learning lifecycle management
 
 
-important saprk methods that are used in databricks notebooks
+Important saprk methods that are used in databricks notebooks
 show()
 printSchema()
 select()
