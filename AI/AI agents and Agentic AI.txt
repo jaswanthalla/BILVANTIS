@@ -19,9 +19,9 @@ Key components involved in building ai agents:
 
 * The model, which helps the agent interpret its perception and guide its understanding
 
-* Decision making logic, which determines how the agent selects appropriate actions
+* Decision making logic, which determines how the agent selects appropriate actions.
 
-* Actuators, the mechanisms actions and affects its environment
+* Actuators, the mechanisms actions and affects its environment.
 
 * Feedback mechanisms allow the agent to evaluate whether it has successfully achieved its intended goals
 
