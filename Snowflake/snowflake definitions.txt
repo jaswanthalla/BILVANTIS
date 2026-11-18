@@ -1,0 +1,144 @@
+A Data Warehouse (DWH) is a centralized repository that stores large amounts of historical data collected from multiple sources for reporting, analytics, and business intelligence.
+
+Unlike traditional databases that handle daily transactions, a data warehouse is designed for analysis and decision-making.
+
+Source Systems
+     ↓
+ETL/ELT Process
+     ↓
+Data Warehouse
+     ↓
+Reports, Dashboards, Analytics
+
+-----------------
+
+Time Travel is a Snowflake feature that allows you to access and restore historical data that has been changed or deleted during a specified retention period.
+
+----------------
+
+Permanent Table
+
+Used to store critical business data permanently with Time Travel and Fail-safe support.
+
+Temporary Table
+
+Exists only during the current session and is automatically removed when the session ends.
+
+Transient Table
+
+Persists across sessions but does not have Fail-safe, making it cheaper than permanent tables.
+
+External Table
+
+Allows querying data stored externally in AWS S3, Azure Blob Storage, or Google Cloud Storage without loading it into Snowflake.
+
+-----------------------
+
+A Stage is a location where data files are stored temporarily before loading them into Snowflake tables or after unloading data from Snowflake.
+
+PUT        = Local File → Stage
+COPY INTO  = Stage → Table
+COPY INTO  = Table → Stage (Unload)
+GET        = Stage → Local File
+
+User Stage (@~) → Individual user files
+Table Stage (@%table_name) → Files related to a specific table
+Named Internal Stage (@stage_name) → Reusable Snowflake-managed stage
+External Stage → S3, Azure Blob, or GCS storage integration.
+
+---------------
+
+Zero-Copy Cloning is a Snowflake feature that creates an exact copy of a database, schema, table, or stage without physically copying the data.
+
+The clone initially points to the same underlying data files as the original object.
+
+------------------
+
+A Stream is a Snowflake object that captures and tracks data changes (CDC - Change Data Capture) made to a table.
+
+It records:
+
+INSERT operations
+UPDATE operations
+DELETE operations
+
+Instead of scanning the entire table, a stream allows you to process only the changed records since the last consumption.
+
+What is a Stream in Snowflake?
+
+A Stream is a Change Data Capture (CDC) object that tracks inserts, updates, and deletes on a table and allows incremental data processing.
+
+Types of Streams:
+
+Standard Stream
+Append-Only Stream
+Insert-Only Stream (for External Tables)
+
+Why use Streams for SCD Type 2?
+
+Streams capture only changed records, making it efficient to update dimension tables while preserving historical data.
+
+--------------------
+
+A Task is a Snowflake object used to automate SQL execution on a schedule or after another task completes.
+
+Think of it like a cron job (Linux) or SQL Server Agent Job.
+
+Why Use Tasks?
+
+Tasks can automate:
+
+Data loading
+Data transformation
+SCD processing
+Stream consumption
+Report table refreshes
+ETL pipelines
+
+-------------------
+
+A View is a virtual table created from the result of a SQL query.
+
+A view does not store data itself. Instead, it stores the SQL query, and whenever you query the view, Snowflake executes the underlying query and returns the latest data.
+
+What is a View?
+
+A View is a virtual table based on the result of a SQL query. It does not store data itself but provides a logical layer to simplify queries, enhance security, and present data in a customized format.
+
+Types of Views in Snowflake:
+
+Simple View
+Complex View
+Secure View
+Materialized View
+
+-------------------
+
+A Cache is a temporary storage area that stores frequently accessed data so that future requests can be served faster without reprocessing or rereading the original data.
+
+What is Cache?
+
+A cache is a temporary storage mechanism that stores frequently accessed data or query results to improve performance and reduce processing time.
+
+Types of Cache in Snowflake:
+
+Result Cache - Stores query results.
+Local Disk Cache (Warehouse Cache) - Stores data on warehouse SSDs.
+Metadata Cache - Stores metadata and micro-partition information.
+
+--------------
+
+A masking policy is a Snowflake security feature that hides sensitive data from unauthorized users.
+
+Examples:
+
+Email addresses
+Phone numbers
+Aadhaar numbers
+PAN numbers
+Salary information
+
+Instead of giving everyone access to the real data, Snowflake dynamically masks the values based on conditions.
+
+The policy checks the current user's role using CURRENT_ROLE(). If the user is accessing the data with the HR_ROLE, Snowflake returns the original column value. For all other roles, Snowflake masks the data and returns 'XXXXXX'. This enables role-based dynamic data masking without changing the underlying stored data.
+
