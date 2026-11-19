@@ -41,10 +41,10 @@ COPY INTO  = Stage → Table
 COPY INTO  = Table → Stage (Unload)
 GET        = Stage → Local File
 
-User Stage (@~) → Individual user files
-Table Stage (@%table_name) → Files related to a specific table
-Named Internal Stage (@stage_name) → Reusable Snowflake-managed stage
-External Stage → S3, Azure Blob, or GCS storage integration.
+User Stage (@~)  → Individual user files
+Table Stage (@%table_name)  → Files related to a specific table
+Named Internal Stage (@stage_name)  → Reusable Snowflake-managed stage
+External Stage  → S3, Azure Blob, or GCS storage integration.
 
 ---------------
 
@@ -142,3 +142,9 @@ Instead of giving everyone access to the real data, Snowflake dynamically masks 
 
 The policy checks the current user's role using CURRENT_ROLE(). If the user is accessing the data with the HR_ROLE, Snowflake returns the original column value. For all other roles, Snowflake masks the data and returns 'XXXXXX'. This enables role-based dynamic data masking without changing the underlying stored data.
 
+----------------------
+
+In Snowflake, the COPY INTO command is used to either:
+
+Load data from a stage into a table.
+Unload data from a table into a stage.
