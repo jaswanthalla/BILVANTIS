@@ -160,3 +160,10 @@ Suppose a table contains 10 million records.
 Instead of checking all 10 million rows, you select 10,000 representative rows.
 
 Data Sampling is the process of selecting a representative subset of data from a large dataset for analysis, testing, or modeling purposes. The major types are Simple Random Sampling, Systematic Sampling, Stratified Sampling, Cluster Sampling, Convenience Sampling, Judgment Sampling, Quota Sampling, and Snowball Sampling. In Snowflake, common sampling methods are BERNOULLI (row-level) and SYSTEM (block-level) sampling.
+
+-----------------
+
+Data Sharing in Snowflake is a feature that allows one Snowflake account to share data with another Snowflake account without copying or moving the data.
+
+In Snowflake, Data Sharing is a feature that allows one Snowflake account to securely share live data with another account without copying or moving the data. The provider creates a share, grants access to database objects, and adds consumer accounts. Consumers can query the shared data in real time while the data remains stored in the provider's account. This eliminates data duplication and supports secure, real-time collaboration between organizations.
+
