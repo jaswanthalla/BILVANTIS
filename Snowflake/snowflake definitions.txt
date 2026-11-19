@@ -158,3 +158,5 @@ For example:
 Suppose a table contains 10 million records.
 
 Instead of checking all 10 million rows, you select 10,000 representative rows.
+
+Data Sampling is the process of selecting a representative subset of data from a large dataset for analysis, testing, or modeling purposes. The major types are Simple Random Sampling, Systematic Sampling, Stratified Sampling, Cluster Sampling, Convenience Sampling, Judgment Sampling, Quota Sampling, and Snowball Sampling. In Snowflake, common sampling methods are BERNOULLI (row-level) and SYSTEM (block-level) sampling.
