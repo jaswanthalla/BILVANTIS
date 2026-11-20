@@ -153,6 +153,8 @@ Unload data from a table into a stage.
 
 Data Sampling is the process of selecting a small subset of data from a large dataset so that we can analyze, test, or validate the data without processing the entire dataset.
 
+Data Sampling is the process of selecting a small subset of data from a large dataset so that we can analyze, test, or validate the data without processing the entire dataset.
+
 For example:
 
 Suppose a table contains 10 million records.
