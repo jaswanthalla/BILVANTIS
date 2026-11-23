@@ -19,3 +19,48 @@ Scheduling and orchestration
 Reusable code using Jinja templates
 
 -------------------
+
+ETL (Extract → Transform → Load)
+
+Traditional approach.
+
+Source System
+↓
+Extract
+↓
+Transform (Outside DW)
+↓
+Load
+↓
+Data Warehouse
+
+Drawbacks
+
+Extra infrastructure needed
+Slow processing
+High maintenance
+
+
+ELT (Extract → Load → Transform)
+
+Modern approach used by DBT.
+
+Source System
+↓
+Extract
+↓
+Load
+↓
+Data Warehouse
+↓
+Transform (DBT)
+
+Advantages
+
+Faster
+Uses warehouse scalability
+Less data movement
+Easier maintenance
+
+--------------------
+
