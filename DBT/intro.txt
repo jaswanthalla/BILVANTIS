@@ -1,0 +1,21 @@
+DBT (Data Build Tool) is an open-source transformation tool used to transform data inside a data warehouse such as Snowflake, Databricks, Redshift, BigQuery, or Synapse.
+
+DBT follows the ELT approach:
+
+Extract data → Source systems
+Load data → Data Warehouse
+Transform data → DBT
+
+Instead of moving data outside the warehouse, DBT generates SQL and runs it directly inside Snowflake.
+
+Key Features
+
+SQL-based transformations
+Data testing
+Documentation generation
+Dependency management
+Version control with Git
+Scheduling and orchestration
+Reusable code using Jinja templates
+
+-------------------
