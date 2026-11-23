@@ -140,7 +140,8 @@ Salary information
 
 Instead of giving everyone access to the real data, Snowflake dynamically masks the values based on conditions.
 
-The policy checks the current user's role using CURRENT_ROLE(). If the user is accessing the data with the HR_ROLE, Snowflake returns the original column value. For all other roles, Snowflake masks the data and returns 'XXXXXX'. This enables role-based dynamic data masking without changing the underlying stored data.
+The policy checks the current user's role using CURRENT_ROLE().
+If the user is accessing the data with the HR_ROLE, Snowflake returns the original column value. For all other roles, Snowflake masks the data and returns 'XXXXXX'. This enables role-based dynamic data masking without changing the underlying stored data.
 
 ----------------------
 
