@@ -171,3 +171,4 @@ Data Sharing in Snowflake is a feature that allows one Snowflake account to shar
 In Snowflake,
 Data Sharing is a feature that allows one Snowflake account to securely share live data with another account without copying or moving the data. The provider creates a share, grants access to database objects, and adds consumer accounts. Consumers can query the shared data in real time while the data remains stored in the provider's account. This eliminates data duplication and supports secure, real-time collaboration between organizations.
 
+"ETL transforms data before loading it into the warehouse, while ELT loads raw data first and performs transformations inside the warehouse. DBT follows the ELT approach and leverages Snowflake's computing power."

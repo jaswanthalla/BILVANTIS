@@ -64,3 +64,31 @@ Easier maintenance
 
 --------------------
 
+DBT solves the transformation layer problem in modern data pipelines.
+
+Without DBT:
+
+Raw Data
+↓
+Manual SQL Scripts
+↓
+No Testing
+↓
+No Version Control
+↓
+Maintenance Issues
+
+With DBT:
+
+Raw Data
+↓
+DBT Models
+↓
+Testing
+↓
+Documentation
+↓
+Version Control
+↓
+Analytics Layer
+
