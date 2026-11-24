@@ -116,3 +116,12 @@ Power BI / Tableau
 
 Main reasons to use DBT
 
+"DBT is used to perform data transformations inside a data warehouse like Snowflake. It helps create reliable and maintainable data pipelines by providing SQL-based transformations, automated testing, documentation, lineage tracking, dependency management, Git integration, reusable code through macros, and incremental processing. It simplifies the transformation layer of modern ELT architectures."
+
+Transform data inside Snowflake (ELT approach)
+Data quality testing
+Dependency management using ref()
+Documentation and lineage generation
+Version control through Git
+
+These are the five important reasons to use DBT
