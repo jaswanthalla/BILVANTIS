@@ -113,3 +113,6 @@ Mart Models
 Power BI / Tableau
 
 "DBT is a transformation tool that follows the ELT approach. It runs SQL transformations directly inside Snowflake, provides testing, documentation, version control, lineage tracking, and helps build reliable analytics-ready datasets."
+
+Main reasons to use DBT
+
