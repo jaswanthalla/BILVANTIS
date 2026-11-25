@@ -92,7 +92,7 @@ Version Control
 ↓
 Analytics Layer
 
---------------------
+------------------------
 
 Complete DBT Flow
 
@@ -124,4 +124,4 @@ Dependency management using ref()
 Documentation and lineage generation
 Version control through Git
 
-These are the five important reasons to use DBT
+The above five are the important reasons to use DBT
